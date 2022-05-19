@@ -1,0 +1,6 @@
+project: rnshah9/vgmstream
+target: vgmstream-cli
+
+cmds:
+  - cmd: /repo/build/cli/vgmstream-cli -o out.wav @@
+    filepath: /test.adx
