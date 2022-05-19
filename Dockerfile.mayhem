@@ -1,0 +1,9 @@
+FROM --platform=linux/amd64 ubuntu:20.04
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y  build-essential git cmake libmpg123-dev libvorbis-dev libspeex-dev libavformat-dev libavcodec-dev libavutil-dev libswresample-dev libopus-dev libao-dev audacious-dev
+
+ADD . /repo
+WORKDIR /repo/build
+RUN cmake -S .. -B .
+RUN make -j8
