@@ -3,16 +3,13 @@ FROM --platform=linux/amd64 ubuntu:20.04 as builder
 RUN apt-get update
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y  build-essential git cmake libmpg123-dev libvorbis-dev libspeex-dev libavformat-dev libavcodec-dev libavutil-dev libswresample-dev libopus-dev libao-dev audacious-dev
 
-ADD . /repo
+COPY . /repo
 WORKDIR /repo/build
-RUN cmake -S .. -B .
+RUN cmake -S .. -B . -DCMAKE_INSTALL_PREFIX=/install
 RUN make -j8
-
-RUN mkdir -p /deps
-RUN ldd /repo/build/cli/vgmstream-cli | tr -s '[:blank:]' '\n' | grep '^/' | xargs -I % sh -c 'cp % /deps;'
+RUN make install
 
 FROM ubuntu:20.04 as package
-
-COPY --from=builder /deps /deps
-COPY --from=builder /repo/build/cli/vgmstream-cli /repo/build/cli/vgmstream-cli
-ENV LD_LIBRARY_PATH=/deps
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y  libmpg123-dev libvorbis-dev libavformat-dev libavutil-dev libavcodec-dev libspeex-dev 
+COPY --from=builder /install /install

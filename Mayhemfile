@@ -2,5 +2,4 @@ project: vgmstream
 target: vgmstream-cli
 
 cmds:
-  - cmd: /repo/build/cli/vgmstream-cli -o out.wav /test.adx
-    filepath: /test.adx
+  - cmd: /install/bin/vgmstream-cli -o out.wav @@
