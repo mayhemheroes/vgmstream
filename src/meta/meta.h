@@ -991,4 +991,8 @@ VGMSTREAM* init_vgmstream_tt_ad(STREAMFILE* sf);
 VGMSTREAM* init_vgmstream_bw_mp3_riff(STREAMFILE* sf);
 VGMSTREAM* init_vgmstream_bw_riff_mp3(STREAMFILE* sf);
 
+VGMSTREAM* init_vgmstream_sndz(STREAMFILE* sf);
+
+VGMSTREAM* init_vgmstream_vab(STREAMFILE* sf);
+
 #endif /*_META_H*/

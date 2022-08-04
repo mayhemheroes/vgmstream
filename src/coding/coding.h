@@ -167,7 +167,7 @@ void decode_msadpcm_stereo(VGMSTREAM* vgmstream, sample_t* outbuf, int32_t first
 void decode_msadpcm_mono(VGMSTREAM* vgmstream, sample_t* outbuf, int channelspacing, int32_t first_sample, int32_t samples_to_do, int channel, int config);
 void decode_msadpcm_ck(VGMSTREAM* vgmstream, sample_t* outbuf, int channelspacing, int32_t first_sample, int32_t samples_to_do, int channel);
 long msadpcm_bytes_to_samples(long bytes, int block_size, int channels);
-int msadpcm_check_coefs(STREAMFILE* sf, off_t offset);
+int msadpcm_check_coefs(STREAMFILE* sf, uint32_t offset);
 
 
 /* yamaha_decoder */
@@ -409,6 +409,7 @@ typedef struct {
 
     uint32_t setup_id; /* external setup */
     int big_endian; /* flag */
+    uint32_t stream_end; /* optional, to avoid overreading into next subsong or chunk */
 
     /* Wwise Vorbis config */
     wwise_setup_t setup_type;

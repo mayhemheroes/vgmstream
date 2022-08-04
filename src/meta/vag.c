@@ -15,17 +15,17 @@ VGMSTREAM* init_vgmstream_vag(STREAMFILE* sf) {
 
 
     /* checks */
+    if (((read_u32be(0x00,sf) & 0xFFFFFF00) != get_id32be("VAG\0")) &&
+        ((read_u32le(0x00,sf) & 0xFFFFFF00) != get_id32be("VAG\0")))
+        goto fail;
+
     /* .vag: standard
      * .swag: Frantix (PSP)
      * .str: Ben10 Galactic Racing
      * .vig: MX vs. ATV Untamed (PS2)
      * .l/r: Crash Nitro Kart (PS2), Gradius V (PS2)
      * .vas: Kingdom Hearts II (PS2) */
-    if ( !check_extensions(sf,"vag,swag,str,vig,l,r,vas") )
-        goto fail;
-
-    if (((read_u32be(0x00,sf) & 0xFFFFFF00) != 0x56414700) && /* "VAG" */
-        ((read_u32le(0x00,sf) & 0xFFFFFF00) != 0x56414700))
+    if (!check_extensions(sf,"vag,swag,str,vig,l,r,vas"))
         goto fail;
 
     file_size = get_streamfile_size(sf);
@@ -52,12 +52,16 @@ VGMSTREAM* init_vgmstream_vag(STREAMFILE* sf) {
     /* check variation */
     switch(vag_id) {
 
-        case 0x56414731: /* "VAG1" (1 channel) [Metal Gear Solid 3 (PS2)] */
-            meta_type = meta_PS2_VAG1;
+        case 0x56414731: /* "VAG1" [Metal Gear Solid 3 (PS2), Cabela's African Safari (PSP), Shamu's Deep Sea Adventures (PS2)] */
+            meta_type = meta_PS2_VAG1; //TODO not always Konami (Sand Grain Studios)
             start_offset = 0x40; /* 0x30 is extra data in VAG1 */
-            channels = 1;
-            interleave = 0;
+            interleave = 0x10;
             loop_flag = 0;
+
+            /* MGS3 is 0 while Cabela's has this, plus description is 0x10 " " then 0x10 "-" */
+            channels = read_u8(0x1e, sf);
+            if (channels == 0)
+                channels = 1;
             break;
 
         case 0x56414732: /* "VAG2" (2 channels) [Metal Gear Solid 3 (PS2)] */

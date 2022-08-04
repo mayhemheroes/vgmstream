@@ -137,7 +137,7 @@
     <ClInclude Include="meta\sab_streamfile.h" />
     <ClInclude Include="meta\riff_ogg_streamfile.h" />
     <ClInclude Include="meta\sfh_streamfile.h" />
-    <ClInclude Include="meta\sqex_sead_streamfile.h" />
+    <ClInclude Include="meta\sqex_streamfile.h" />
     <ClInclude Include="meta\txth_streamfile.h" />
     <ClInclude Include="meta\ubi_bao_streamfile.h" />
     <ClInclude Include="meta\ubi_sb_streamfile.h" />
@@ -252,6 +252,7 @@
     <ClCompile Include="meta\sbk.c" />
     <ClCompile Include="meta\sspf.c" />
     <ClCompile Include="meta\tgc.c" />
+    <ClCompile Include="meta\vab.c" />
     <ClCompile Include="meta\vs_str.c" />
     <ClCompile Include="meta\ps2_wmus.c" />
     <ClCompile Include="meta\ivag.c" />
@@ -551,6 +552,7 @@
     <ClCompile Include="meta\smk.c" />
     <ClCompile Include="meta\smp.c" />
     <ClCompile Include="meta\smv.c" />
+    <ClCompile Include="meta\sndz.c" />
     <ClCompile Include="meta\sps_n1.c" />
     <ClCompile Include="meta\spt_spd.c" />
     <ClCompile Include="meta\stm.c" />

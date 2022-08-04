@@ -25,6 +25,7 @@ static const char* extension_list[] = {
     "2dx9",
     "2pfs",
     "3do",
+    "3ds", //txth/reserved [F1 2011 (3DS)] 
     "4", //for Game.com audio
     "8", //txth/reserved [Gungage (PS1)]
     "800",
@@ -532,6 +533,9 @@ static const char* extension_list[] = {
     "sxd",
     "sxd2",
     "sxd3",
+    "szd",
+    "szd1",
+    "szd3",
 
     "tad",
     "tec",
@@ -556,6 +560,7 @@ static const char* extension_list[] = {
     "v0",
     //"v1", //dual channel with v0
     "va3",
+    "vab",
     "vag",
     "vai",
     "vam", //txth/reserved [Rocket Power: Beach Bandits (PS2)]
@@ -570,6 +575,7 @@ static const char* extension_list[] = {
     "vgm", //txth/reserved [Maximo (PS2)]
     "vgs",
     "vgv",
+    "vh",
     "vid",
     "vig",
     "vis",
@@ -1155,7 +1161,7 @@ static const meta_info meta_info_list[] = {
         {meta_PS2_WB,               "Shooting Love. ~TRIZEAL~ WB header"},
         {meta_S14,                  "Namco .S14 raw header"},
         {meta_SSS,                  "Namco .SSS raw header"},
-        {meta_PS2_GCM,              "GCM 'MCG' Header"},
+        {meta_PS2_GCM,              "Namco GCM header"},
         {meta_PS2_SMPL,             "Homura SMPL header"},
         {meta_PS2_MSA,              "Success .MSA header"},
         {meta_NGC_PDT,              "Hudson .PDT header"},
@@ -1402,6 +1408,8 @@ static const meta_info meta_info_list[] = {
         {meta_ESF,                  "Eurocom ESF header"},
         {meta_ADM3,                 "Crankcase ADM3 header"},
         {meta_TT_AD,                "Traveller's Tales AUDIO_DATA header"},
+        {meta_SNDZ,                 "Sony SNDZ header"},
+        {meta_VAB,                  "Sony VAB header"},
 };
 
 void get_vgmstream_coding_description(VGMSTREAM* vgmstream, char* out, size_t out_size) {
