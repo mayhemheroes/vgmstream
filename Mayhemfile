@@ -1,0 +1,5 @@
+project: vgmstream
+target: vgmstream-cli
+
+cmds:
+  - cmd: /install/bin/vgmstream-cli -o out.wav @@

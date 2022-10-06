@@ -1,0 +1,15 @@
+FROM --platform=linux/amd64 ubuntu:20.04 as builder
+
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y  build-essential git cmake libmpg123-dev libvorbis-dev libspeex-dev libavformat-dev libavcodec-dev libavutil-dev libswresample-dev libopus-dev libao-dev audacious-dev
+
+COPY . /repo
+WORKDIR /repo/build
+RUN cmake -S .. -B . -DCMAKE_INSTALL_PREFIX=/install
+RUN make -j8
+RUN make install
+
+FROM ubuntu:20.04 as package
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y  libmpg123-dev libvorbis-dev libavformat-dev libavutil-dev libavcodec-dev libspeex-dev 
+COPY --from=builder /install /install
